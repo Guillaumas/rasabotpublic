@@ -1,0 +1,90 @@
+version: "3.1"
+
+intents:
+  - reserver_table
+  - confirmer
+  - annuler
+  - afficher_reservation
+  - fournir_reservation_id 
+  - salutation
+  - au_revoir
+
+entities:
+  - time
+  - number
+  - phone-number
+
+slots:
+  date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: time
+        conditions:
+          - active_loop: reservation_form
+
+  personnes:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: number
+        conditions:
+          - active_loop: reservation_form
+
+  telephone:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: phone-number
+        conditions:
+          - active_loop: reservation_form
+
+  reservation_id:
+    type: text
+    mappings:
+      - type: custom
+      - type: from_text
+
+  confirmation_pending:
+    type: bool
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  recap_message:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+responses:
+  utter_ask_date:
+    - text: "Pour quelle date souhaitez-vous réserver ?"
+
+  utter_ask_personnes:
+    - text: "Combien de personnes ?"
+
+  utter_ask_telephone:
+    - text: "Quel est votre numéro de téléphone ?"
+
+  utter_au_revoir:
+    - text: "Merci et à bientôt !"
+
+forms:
+  reservation_form:
+    required_slots:
+      - date
+      - personnes
+      - telephone
+
+actions:
+  - action_reserver_table
+  - validate_reservation_form
+  - action_confirmer_reservation
+  - action_annuler_reservation
+  - action_afficher_reservation
+  - action_afficher_recap
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

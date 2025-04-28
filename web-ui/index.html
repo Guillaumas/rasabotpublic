@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>La Fourchette Dorée - Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      padding-top: 50px;
+    }
+    #chatbox {
+      width: 400px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+    }
+    .msg {
+      margin: 5px 0;
+    }
+    .user {
+      text-align: right;
+      color: blue;
+    }
+    .bot {
+      text-align: left;
+      color: green;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      background: #ff8c00;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #inputZone {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chatbox">
+    <div id="messages"></div>
+    <div id="inputZone">
+      <input id="userInput" type="text" placeholder="Écrivez un message..." />
+      <button onclick="sendMessage()">Envoyer</button>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value;
+      if (!message) return;
+
+      appendMessage("user", message);
+      input.value = "";
+
+      const response = await fetch("http://localhost:5005/webhooks/rest/webhook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sender: "utilisateur_test",
+          message: message
+        })
+      });
+
+      const data = await response.json();
+      data.forEach((msg) => {
+        appendMessage("bot", msg.text);
+      });
+    }
+
+    function appendMessage(sender, text) {
+      const msgContainer = document.getElementById("messages");
+      const msg = document.createElement("div");
+      msg.className = `msg ${sender}`;
+      msg.textContent = text;
+      msgContainer.appendChild(msg);
+      msgContainer.scrollTop = msgContainer.scrollHeight;
+    }
+  </script>
+</body>
+</html>

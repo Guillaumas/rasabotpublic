@@ -1,0 +1,34 @@
+services:
+  rasa:
+    image: rasa/rasa:3.6.2
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./rasa:/app
+    command: >
+      run --enable-api --cors "*" --debug
+    depends_on:
+      - actions
+      - duckling
+    networks:
+      - rasa-network
+
+  actions:
+    build:
+      context: ./actions
+      dockerfile: Dockerfile
+    ports:
+      - "5055:5055"
+    networks:
+      - rasa-network
+
+  duckling:
+    image: rasa/duckling:latest
+    ports:
+      - "8000:8000"
+    networks:
+      - rasa-network
+
+networks:
+  rasa-network:
+    driver: bridge

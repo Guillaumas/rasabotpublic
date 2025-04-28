@@ -1,0 +1,7 @@
+version: "3.1"
+
+regex_features:
+  - name: reservation_id
+    pattern: "RES-[a-f0-9]{8}"
+  - name: phone_number
+    pattern: "\\b0[1-9](\\d{2}){4}\\b"

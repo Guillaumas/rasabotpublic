@@ -1,0 +1,40 @@
+version: "3.1"
+
+rules:
+- rule: Démarrer le formulaire de réservation
+  steps:
+    - intent: reserver_table
+    - action: reservation_form
+    - active_loop: reservation_form
+
+- rule: Terminer le formulaire
+  condition:
+    - active_loop: reservation_form
+  steps:
+    - action: reservation_form
+    - active_loop: null
+    - action: action_reserver_table
+
+- rule: Confirmer la réservation
+  steps:
+    - intent: confirmer
+    - slot_was_set:
+        - confirmation_pending: true
+    - action: action_confirmer_reservation
+
+- rule: Annuler la réservation
+  steps:
+    - intent: annuler
+    - slot_was_set:
+        - confirmation_pending: true
+    - action: action_annuler_reservation
+
+- rule: Afficher Reservation
+  steps:
+    - intent: afficher_reservation
+    - action: action_afficher_reservation
+
+- rule: Fournir ID de réservation
+  steps:
+    - intent: fournir_reservation_id
+    - action: action_afficher_reservation

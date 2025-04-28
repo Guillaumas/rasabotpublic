@@ -1,0 +1,122 @@
+version: "3.1"
+
+nlu:
+- intent: reserver_table
+  examples: |
+    - je veux réserver une table pour 3 personnes demain
+    - réserver pour 2 le 12 avril
+    - une table pour 4 demain soir
+    - je voudrais une table pour deux
+    - réserver pour 3 personnes dans 3 jours
+    - on sera 5 le 25 mai
+    - est-ce que je peux réserver ?
+    - réserver une table pour quatre ce soir
+    - je souhaite faire une réservation
+    - j'aimerais une table pour 2 demain à 20h
+    - réserver pour demain soir
+    - j'aimerais réserver une table
+    - peux-tu me réserver une place ?
+    - je cherche à réserver une table pour ce soir
+    - je veux une table pour vendredi
+    - on est 6 à vouloir dîner samedi
+    - je veux réserver
+    - je voudrais réserver une table
+    - je veux réserver pour demain
+    - je souhaite réserver une table pour 2
+    - réserver une table
+    - réservation
+    - je voudrais faire une réservation
+    - je veux réserver pour trois personnes
+    - faire une réservation
+    - puis-je réserver une table ?
+    - je souhaite faire une réservation
+    - peux-tu réserver une table pour moi ?
+    - je désire réserver une table
+    - réserver un dîner
+    - faire une réservation au restaurant
+    - réserver pour ce soir
+    - je veux réserver une place pour deux
+    - réserver pour dîner
+    - je veux réserver
+    - réserver
+    - réservation
+    - je réserve
+    - faire une réservation
+
+
+- intent: salutation
+  examples: |
+    - bonjour
+    - salut
+    - hello
+    - bonsoir
+    - coucou
+    - hi
+    - salutations
+    - wsh
+    - bon matin
+    - hola
+    - yo
+    - hey
+    - salut le gaté
+
+- intent: au_revoir
+  examples: |
+    - au revoir
+    - à bientôt
+    - merci, c'est tout
+    - bonne journée
+    - merci, au revoir
+    - à la prochaine
+    - merci beaucoup
+    - merci pour votre aide
+    - merci, à bientôt 
+    - ciao
+
+- intent: confirmer
+  examples: |
+    - oui
+    - c'est bon
+    - je confirme
+    - tout est correct
+    - validé
+    - parfait
+    - d'accord
+    - ça marche
+    - ok
+    - bien sûr
+
+- intent: annuler
+  examples: |
+    - annuler ma réservation
+    - annule ma table
+    - je souhaite tout annuler
+    - peux-tu annuler ma réservation ?
+    - stoppe la réservation
+    - annule la réservation
+    - annuler la table
+    - annule tout
+    - supprimer ma réservation
+    - annuler
+    - annule
+    - je veux annuler
+    - je veux annuler ma réservation
+    - je veux annuler ma table
+
+- intent: afficher_reservation
+  examples: |
+    - je veux voir ma réservation
+    - quels sont les détails de ma réservation
+    - c'est quoi mon numéro ?
+    - montre-moi la réservation
+    - j’ai oublié les infos
+
+- intent: fournir_reservation_id
+  examples: |
+    - RES-2bce73fb
+    - mon numéro est RES-0abc1234
+    - j’ai noté RES-99ef88aa
+    - c’est RES-42acdef1
+entities:
+- reservation_id
+

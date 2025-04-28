@@ -1,0 +1,5 @@
+action_endpoint:
+  url: "http://actions:5055/webhook"
+
+nlu:
+  url: "http://localhost:5005/model/parse"

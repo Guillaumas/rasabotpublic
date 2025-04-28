@@ -1,0 +1,1 @@
+alias rasabot="cd /Users/blue/Git/python/ChatbotRasa; source venv/bin/activate; code .; rasa shell"
